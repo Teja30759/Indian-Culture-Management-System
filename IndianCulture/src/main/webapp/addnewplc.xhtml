@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Adding Place</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: #333;
+            text-align: center; /* Center align text */
+        }
+
+        /* Video Background styling */
+        .video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind other content */
+            overflow: hidden;
+        }
+
+        .video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Buttons styling */
+        .button-container {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between; /* Space between left and right */
+            padding: 0 20px; /* Add padding to prevent buttons from touching edges */
+            box-sizing: border-box; /* Include padding in width calculation */
+            z-index: 1; /* Ensure buttons are above the video */
+        }
+
+        .button-container .left-buttons {
+            display: flex;
+            gap: 10px; /* Space between buttons on the left */
+        }
+
+        .button-container a {
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .button-container a:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+        }
+
+        /* Form container styling */
+        .form-container {
+            margin-top: 80px; /* To create space between buttons and form */
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent background */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+        }
+
+        h:panelGrid {
+            display: inline-grid;
+            gap: 10px;
+            justify-content: center;
+            text-align: left; /* Align text inside the grid to the left */
+        }
+
+        h:outputLabel {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        h:inputText {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        h:commandButton {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        h:commandButton:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .error-message {
+            color: red;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</h:head>
+<body>
+
+<!-- Video Background -->
+<div class="video">
+    <video id="video" autoplay="autoplay" loop="loop" muted="muted">
+        <source type="video/mp4" src="images/v1.mp4" />
+    </video>
+</div>
+
+<!-- Navigation Buttons -->
+<div class="button-container">
+    <div class="left-buttons">
+        <a href="logginedadminhome.jsp">Home</a>
+        <a href="displayusers.jsp">View Citizens</a>
+    </div>
+    <a href="adminlogout.jsp">Logout</a>
+</div>
+
+<!-- Form to Add Tourist Place -->
+<div class="form-container">
+    <h3><u>Add Tourist Place</u></h3>
+    <h:form>
+        <h:panelGrid columns="3" cellpadding="5">
+            <h:outputLabel for="name" value="Enter Name" />
+            <h:inputText id="name" required="true" requiredMessage="Please Enter Name" value="#{plcBean.name}" />
+            <h:message for="name" styleClass="error-message"/>
+
+            <h:outputLabel for="state" value="Enter Location" />
+            <h:inputText id="state" required="true" requiredMessage="Please Enter Location" value="#{plcBean.state}" />
+            <h:message for="state" styleClass="error-message"/>
+
+            <h:outputLabel for="des" value="Enter Description" />
+            <h:inputText id="des" required="true" requiredMessage="Please Enter Description" value="#{plcBean.des}" />
+            <h:message for="des" styleClass="error-message"/>
+
+            <h:outputLabel for="his" value="Enter Historical Significance" />
+            <h:inputText id="his" required="true" requiredMessage="Please Enter Historical Significance" value="#{plcBean.historicalsig}" />
+            <h:message for="his" styleClass="error-message"/>
+
+            <h:outputLabel for="bst" value="Enter Best Time To Visit" />
+            <h:inputText id="bst" required="true" requiredMessage="Please Enter Best Time To Visit" value="#{plcBean.besttimetovisit}" />
+            <h:message for="bst" styleClass="error-message"/>
+
+            <h:outputLabel for="add" />
+            <h:commandButton id="add" value="Add" action="#{plcBean.addplace()}" />
+        </h:panelGrid>
+    </h:form>
+</div>
+
+</body>
+</html>

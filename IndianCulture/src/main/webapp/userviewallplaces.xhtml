@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>All Tourist Places</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: #d4af37; /* Goldish background */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between; /* Space between the link groups */
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Left section of the navbar */
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Right section of the navbar */
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Navigation links styling */
+        .navbar h\:commandLink {
+            display: inline-block; /* Make the commandLink behave like a button */
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px; /* Space between the links */
+            padding: 12px 20px; /* Larger padding for buttons */
+            border-radius: 6px;
+            background: linear-gradient(135deg, #000, #333); /* Black gradient */
+            font-size: 1.1em;
+            transition: background-color 0.3s, transform 0.3s, color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid #fff; /* White border added */
+            cursor: pointer;
+            text-align: center; /* Center text inside button */
+        }
+
+        /* Hover effect for navigation links */
+        .navbar h\:commandLink:hover {
+            background: linear-gradient(135deg, #333, #555); /* Lighter gradient on hover */
+            transform: translateY(-3px);
+            color: #fff; /* Keep text color white */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+
+        /* Active state for navigation links */
+        .navbar h\:commandLink:active {
+            background: linear-gradient(135deg, #222, #444); /* Darker gradient when clicked */
+            transform: translateY(1px); /* Slightly shift the button down */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
+        }
+
+        /* Focus state for accessibility */
+        .navbar h\:commandLink:focus {
+            outline: 2px solid #fff; /* White outline for focus */
+            outline-offset: 2px; /* Space between outline and button */
+        }
+
+        /* Card container styling */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 40px;
+            gap: 20px;
+        }
+
+        /* Individual card styling */
+        .card {
+            border: 1px solid #d4af37; /* Gold border */
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            width: calc(100% - 40px); /* Responsive width */
+            max-width: 320px; /* Max width for larger screens */
+            padding: 20px;
+            background: linear-gradient(135deg, #f7f2e7, #d4af37); /* Creamish gold gradient */
+            color: #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Hover effect for cards */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header styling within each card */
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.75em;
+            color: #000;
+            border-bottom: 1px solid #d4af37;
+            padding-bottom: 10px;
+        }
+
+        /* Details styling within each card */
+        .card .details {
+            margin: 15px 0;
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .card .details strong {
+            color: #333;
+        }
+
+        /* Title styling */
+        h2 {
+            color: #333;
+            margin-top: 20px;
+            font-size: 2em;
+        }
+
+        /* Underline styling */
+        h2 u {
+            text-decoration: none;
+            border-bottom: 3px solid #d4af37; /* Goldish underline */
+            padding-bottom: 5px;
+        }
+
+        /* Responsive Design Adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column; /* Stack links vertically on smaller screens */
+                align-items: flex-start; /* Align items to the start */
+            }
+
+            .navbar h\:commandLink {
+                margin: 10px 0; /* Add margin between links */
+            }
+
+            .card-container {
+                padding: 20px; /* Reduce padding on smaller screens */
+            }
+
+            .card {
+                width: calc(100% - 40px); /* Full width with padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5em; /* Smaller font size for mobile */
+            }
+
+            .card h3 {
+                font-size: 1.5em; /* Smaller card title */
+            }
+        }
+    </style>
+</h:head>
+
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <!-- Left section with Home and Profile -->
+        <div class="navbar-left">
+            <h:form>
+                <h:commandLink value="Home" action="registereduserhome.jsp" style="margin-right: 20px;" />
+                <h:commandLink value="Profile" action="userprofile.jsp" />
+            </h:form>
+        </div>
+
+       
+    <div class="navbar-right">
+      <h:form>
+        <h:commandLink value="Logout" action="userlogout.jsp" />
+      </h:form>
+    </div>
+  </div>
+
+  <center>
+    <h2><u>ALL PLACES</u></h2>
+
+    <div class="card-container">
+      <ui:repeat value="#{plcBean.placeslist}" var="plc">
+        <div class="card">
+          <h3>#{plc.name}</h3>
+          <div class="details"><strong>Location:</strong> #{plc.state}</div>
+          <div class="details"><strong>Description:</strong> #{plc.des}</div>
+          <div class="details"><strong>Historical Significance:</strong> #{plc.historicalsig}</div>
+          <div class="details"><strong>Best Time to Visit:</strong> #{plc.besttimetovisit}</div>
+        </div>
+      </ui:repeat>
+    </div>
+  </center>
+</body>
+
+</html>

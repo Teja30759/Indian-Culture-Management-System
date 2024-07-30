@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<title>Password Updation</title>
+
+</h:head> 
+<body> 
+
+
+
+<h3 align="center"><u>Change Password</u></h3>
+<center>
+<h:form>
+<h:panelGrid columns="3" cellpadding="5">
+<h:outputLabel for="name" value="Enter UserName" />
+<h:inputText id="name" required="true" requiredMessage="Enter UserName" value="#{adminbean.username}"/>
+<h:message for="name" style="color:  red"/>
+
+
+<h:outputFormat for="pass" value="Enter Password" />
+<h:inputText id="pass" required="true" requiredMessage="Enter Password" value="#{adminbean.password}" />
+<h:message for="pass" style="color:  red"/>
+
+
+<h:outputLabel for= "add" />
+<h:commandButton id="add" styleClass="button" value="Update" action="#{adminbean.changepassword()}"/>
+<h:message for="add" />
+
+
+</h:panelGrid>
+</h:form></center>
+</body> 
+</html>

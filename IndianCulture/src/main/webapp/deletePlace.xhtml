@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+    <title>All Tourist Places</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: #333;
+            text-align: center; /* Center align text */
+        }
+
+        /* Video Background styling */
+        .video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind other content */
+            overflow: hidden;
+        }
+
+        .video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Buttons styling */
+        .button-container {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between; /* Space between left and right */
+            padding: 0 20px; /* Add padding to prevent buttons from touching edges */
+            box-sizing: border-box; /* Include padding in width calculation */
+            z-index: 1; /* Ensure buttons are above the video */
+        }
+
+        .button-container .left-buttons {
+            display: flex;
+            gap: 10px; /* Space between buttons on the left */
+        }
+
+        .button-container a {
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .button-container a:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+        }
+
+        /* Table styling */
+        .table-container {
+            margin-top: 80px; /* To create space between buttons and table */
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent background */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            width: 80%;
+        }
+
+        h2 {
+            margin: 20px;
+            color: white;
+        }
+
+        h:dataTable {
+            width: 100%;
+            border-collapse: separate; /* Allows for rounded corners */
+            border-spacing: 0; /* Remove default spacing */
+            box-shadow: none; /* Remove shadow for transparency */
+            background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent background */
+            border-radius: 15px; /* Rounded corners */
+            z-index: 1;
+        }
+
+        h:column {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Light transparent border */
+        }
+
+        h:column f:facet[name="header"] {
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: white;
+            font-weight: bold;
+            border-top-left-radius: 15px; /* Rounded corners for the top */
+            border-top-right-radius: 15px; /* Rounded corners for the top */
+        }
+
+        h:column:nth-child(even) {
+            background-color: rgba(240, 240, 240, 0.5); /* Semi-transparent alternating rows */
+        }
+
+        h:column:hover {
+            background-color: rgba(220, 220, 220, 0.7); /* Slightly darker hover effect */
+        }
+
+        /* Delete button styling */
+        .delete-button {
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(255, 0, 0, 0.7); /* Semi-transparent red */
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .delete-button:hover {
+            background-color: rgba(255, 0, 0, 0.9);
+            color: #fff;
+        }
+    </style>
+</h:head> 
+<body>
+
+<!-- Video Background -->
+<div class="video">
+    <video id="video" autoplay="autoplay" loop="loop" muted="muted">
+        <source type="video/mp4" src="images/v1.mp4" />
+    </video>
+</div>
+
+<!-- Navigation Buttons -->
+<div class="button-container">
+    <div class="left-buttons">
+        <a href="logginedadminhome.jsp">Home</a>
+        <a href="displayusers.jsp">View Citizens</a>
+    </div>
+    <a href="adminlogout.jsp">Logout</a>
+</div>
+
+<!-- Table to Display Tourist Places -->
+<div class="table-container">
+    <h2><u>ALL PLACES</u></h2>
+    <h:dataTable value="#{plcBean.placeslist}" var="plc" border="2">
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{plc.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Location</f:facet>
+            #{plc.state}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Description</f:facet>
+            #{plc.des}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Historical Significance</f:facet>
+            #{plc.historicalsig}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Best Time To Visit</f:facet>
+            #{plc.besttimetovisit}
+        </h:column>
+        <h:column>
+            <f:facet name="header">DELETE Place</f:facet>
+            <h:form>
+            <h:commandLink value="Delete" action="#{plcBean.delete(plc.name)}" styleClass="delete-button" />
+            </h:form>
+        </h:column>
+    </h:dataTable>
+</div>
+
+</body> 
+</html>

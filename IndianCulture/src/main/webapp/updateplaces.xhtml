@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Update Tourist Place</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Video Background styling */
+        .video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind other content */
+            overflow: hidden;
+        }
+
+        .video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Button Styling */
+        .button {
+            position: absolute;
+            z-index: 1; /* Ensure buttons are above the video */
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+        }
+
+        /* Logout button specific styling */
+        .logout-button {
+            top: 20px;
+            left: 20px;
+        }
+
+        /* Home button specific styling */
+        .home-button {
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Form styling */
+        .form-container {
+            margin-top: 100px;
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent background */
+            border-radius: 15px;
+            padding: 20px;
+            width: 60%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Slight shadow for form */
+            z-index: 1;
+        }
+
+        h3 {
+            margin: 20px;
+            color: white;
+        }
+
+        h:panelGrid {
+            margin: 0 auto; /* Center the panel grid */
+        }
+
+        h:outputLabel {
+            color: white;
+            font-weight: bold;
+        }
+
+        h:inputText {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        h:message {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        h:commandButton {
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(0, 123, 255, 0.7); /* Semi-transparent blue */
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        h:commandButton:hover {
+            background-color: rgba(0, 123, 255, 0.9);
+            color: #fff;
+        }
+    </style>
+</h:head>
+<body>
+
+<!-- Video Background -->
+<div class="video">
+    <video id="video" autoplay="autoplay" loop="loop" muted="muted">
+        <source type="video/mp4" src="images/v1.mp4" />
+    </video>
+</div>
+
+<!-- Logout Button at Top Left -->
+<div class="logout-button button">
+    <h:form>
+        <h:commandLink value="Logout" action="adminlogout.jsp" />
+    </h:form>
+</div>
+
+<!-- Home Button in Original Position -->
+<div class="home-button button">
+    <h:form>
+        <h:commandLink value="Home" action="logginedadminhome.jsp" />
+    </h:form>
+</div>
+
+<!-- Update Form -->
+<center>
+    <div class="form-container">
+        <h3><u>Update Tourist Place</u></h3>
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="5">
+                <h:outputLabel for="name" value="Enter Name" />
+                <h:inputText id="name" required="true" requiredMessage="Please Enter Name" value="#{plcBean.name}" />
+                <h:message for="name" style="color: red" />
+
+                <h:outputLabel for="state" value="Enter Location" />
+                <h:inputText id="state" required="true" requiredMessage="Please Enter Location" value="#{plcBean.state}" />
+                <h:message for="state" style="color: red" />
+
+                <h:outputLabel for="des" value="Enter Description" />
+                <h:inputText id="des" required="true" requiredMessage="Please Enter Description" value="#{plcBean.des}" />
+                <h:message for="des" style="color: red" />
+
+                <h:outputLabel for="his" value="Enter Historical Significance" />
+                <h:inputText id="his" required="true" requiredMessage="Please Enter Historical Significance" value="#{plcBean.historicalsig}" />
+                <h:message for="his" style="color: red" />
+
+                <h:outputLabel for="bst" value="Enter Best Time To Visit" />
+                <h:inputText id="bst" required="true" requiredMessage="Please Enter Best Time To Visit" value="#{plcBean.besttimetovisit}" />
+                <h:message for="bst" style="color: red" />
+
+                <h:outputLabel for="add" />
+                <h:commandButton id="add" value="Update" action="#{plcBean.update()}" />
+                <h:message for="add" />
+            </h:panelGrid>
+        </h:form>
+    </div>
+</center>
+</body>
+</html>

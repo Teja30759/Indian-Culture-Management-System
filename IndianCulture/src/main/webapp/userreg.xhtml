@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+    <title>User SignUp</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+
+    <!-- Add CSS for card -->
+    <style>
+        .card {
+            background-color: #FFFDD0; /* Cream background */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px; /* Increased width to accommodate labels and input fields */
+            margin: auto; /* Center the card horizontally */
+            position: absolute;
+            top: 50%; /* Position the card 50% from the top */
+            left: 50%; /* Position the card 50% from the left */
+            transform: translate(-50%, -50%); /* Center the card vertically and horizontally */
+            border: 1px solid #ddd; /* Optional border */
+            text-align: center;
+        }
+
+        .card h3 {
+            margin-bottom: 20px;
+        }
+
+        .card center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Styling for form elements */
+        .card .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the start */
+            margin-bottom: 20px;
+        }
+
+        .card label {
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+            min-width: 150px; /* Fixed width for labels to align inputs */
+        }
+
+        .card input[type="text"],
+        .card input[type="password"],
+        .card input[type="radio"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .card .error-message {
+            color: red;
+        }
+
+        .card .form-group .input-wrapper {
+            flex: 1;
+        }
+
+        .card .form-group input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .card .button {
+            padding: 10px 20px;
+            background-color: lightblue; /* Cream color for the button */
+            color: #333; /* Text color */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin: auto; /* Center the button */
+        }
+
+        .card .button:hover {
+            background-color: #E6E6D4; /* Slightly darker cream on hover */
+        }
+
+        .card .form-group.center-button {
+            justify-content: center; /* Center the button */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar from index.html -->
+    <nav>
+        <div class="container">
+            <div class="menu-par">
+                <div class="logo-par">
+                    <a href="index.html">
+                        <h2>!NDIA</h2>
+                    </a>
+                </div>
+                <div class="nav">
+                    <ul>
+                        <li><a class="menu_hover" href="userhome.html">Home</a></li>
+                        
+                        <li><a class="menu_hover" href="userlogin.indianculture">Login</a></li>
+                    </ul>
+                </div>
+                <div class="toggle-btn">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section with Video Background -->
+    <header>
+        <div class="container">
+            <div class="home_header_info">
+                <!-- Empty for now -->
+            </div>
+        </div>
+        <div class="video">
+            <video id="video" autoplay="autoplay" loop="loop" muted="muted">
+                <source type="video/mp4" src="images/v1.mp4" />
+            </video>
+        </div>
+    </header>
+    
+    <!-- User SignUp Card Centered Above Video -->
+    <div class="card">
+        <h3>User SignUp</h3>
+        <center>
+            <h:form>
+                <div class="form-group">
+                    <label for="name">Enter Name:</label>
+                    <div class="input-wrapper">
+                        <h:inputText id="name" required="true" requiredMessage="Please Enter Name"
+                            value="#{userbean.name}" />
+                        <h:message for="name" styleClass="error-message" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Select Gender:</label>
+                    <div class="input-wrapper">
+                        <h:selectOneRadio id="gender" required="true" requiredMessage="Please Select Gender" value="#{userbean.gender}">
+                            <f:selectItem itemLabel="Male" itemValue="MALE" />
+                            <f:selectItem itemLabel="Female" itemValue="FEMALE" />
+                            <f:selectItem itemLabel="Others" itemValue="OTHER" />
+                        </h:selectOneRadio>
+                        <h:message for="gender" styleClass="error-message" />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Enter Contact:</label>
+                    <div class="input-wrapper">
+                        <h:inputText id="contact" required="true" requiredMessage="Contact number is mandatory" validatorMessage="Contact Number must contain 10 digits only" value="#{userbean.number}" >
+                            <f:validateRegex pattern="[6789][0-9]{9}"/>
+                        </h:inputText>
+                        <h:message for="contact" styleClass="error-message"/>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Enter Email:</label>
+                    <div class="input-wrapper">
+                        <h:inputText id="email" required="true" requiredMessage="Please Enter Email"
+                            value="#{userbean.email}" />
+                        <h:message for="email" styleClass="error-message" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Enter Password:</label>
+                    <div class="input-wrapper">
+                        <h:inputSecret id="password" required="true" requiredMessage="Please Enter Password"
+                            value="#{userbean.password}" />
+                        <h:message for="password" styleClass="error-message" />
+                    </div>
+                </div>
+
+                <div class="form-group center-button">
+                    <div class="input-wrapper">
+                        <h:commandButton styleClass="button" value="SignUp" action="#{userbean.add()}" />
+                        <h:message for="SignUp" styleClass="error-message" />
+                    </div>
+                </div>
+            </h:form>
+        </center>
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/extrenaljq.js"></script>
+</body>
+
+</html>
